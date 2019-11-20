@@ -8,3 +8,7 @@ version 1.1
 version 1.2
   - Created basic GUI to get ticker from user
   - Will now get price from any valid ticker
+
+version 1.3
+  - Connected to IEX api to get list of stocks and store in csv
+  

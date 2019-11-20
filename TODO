@@ -1,4 +1,5 @@
-Version 1.3
+Version 2.0
     - Improved Gui experience
     - Responsive feedback for invalid ticker
-    
+    - Get a list of available tickers and store it [DONE]
+    - User can seach from available tickers

@@ -14,13 +14,18 @@ def GUI():
 
     global  site_to_scrape  
 
-    sg.change_look_and_feel('DarkAmber')	# Add a touch of color
+    # ------ Menu Definition ------ #
+    menu_def = [['&Tickers',['AAPL','AMZN','MSFT']]]
+
+    sg.change_look_and_feel('Black')	# Add a touch of color
+
     # All the stuff inside your window.
-    layout = [[sg.Text('Enter ticker for real time data'), sg.InputText()],
+    layout = [[sg.Menu(menu_def)],[sg.Text('Enter ticker'), sg.InputText()],
             [sg.Button('Search')] ]
 
     # Create the Window
     window = sg.Window('TradesMan', layout)
+    
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, ticker = window.read()
