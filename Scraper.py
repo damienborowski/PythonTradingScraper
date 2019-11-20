@@ -15,26 +15,25 @@ def GUI():
     global  site_to_scrape  
 
     # ------ Menu Definition ------ #
-    menu_def = [['&Tickers',['AAPL','AMZN','MSFT']]]
+    menu_def = [['&Tickers',['AAPL','AMZN','MSFT','MGI']]]
 
     sg.change_look_and_feel('Black')	# Add a touch of color
 
     # All the stuff inside your window.
-    layout = [[sg.Menu(menu_def)],[sg.Text('Enter ticker'), sg.InputText()],
-            [sg.Button('Search')] ]
+    layout = [[sg.Menu(menu_def)],[sg.Text('Enter Price'), sg.InputText()],
+            [sg.Button('Create Alert')] ]
 
     # Create the Window
-    window = sg.Window('TradesMan', layout)
+    window = sg.Window('Alert', layout)
     
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, ticker = window.read()
         if event in (None, 'Cancel'):	# if user closes window or clicks cancel
             break
-        if len(ticker[0]) <= 4:
-            print('You entered ', ticker[0])
-            site_to_scrape += ticker[0]
-            print(site_to_scrape)
+        print('You entered ', ticker[0])
+        site_to_scrape += ticker[0]
+        print(ticker[0])
 
     window.close()
 
@@ -64,25 +63,26 @@ def send_mail():
 
     server.login('borowski.damien1@gmail.com','dxigaueeafstmgum')
 
-    subject = 'Price fell down'
-    body = 'TESTING'
+    subject = 'Stock Market Alert'
+    body = 'The price of: '
 
     msg = f"Subject: {subject}\n\n{body}"
 
     server.sendmail(
         'borowski.damien1@gmail.com',
-        'neimadb@hotmail.com',
+        'jordan.aherne@ucdconnect.ie',
         msg
     )
     print("Email has been sent")
 
     server.quit
-    sys.exit()
+    #sys.exit()
 
 #while(True):
     #check_price()
-    #time.sleep(60)
-
+    #send_mail()
+    #time.sleep(1)
+#send_mail()
 GUI()
 check_price()
 
