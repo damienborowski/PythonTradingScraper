@@ -34,6 +34,7 @@ def GUI():
         print('You entered ', ticker[0])
         site_to_scrape += ticker[0]
         print(ticker[0])
+        print(event[0])
 
     window.close()
 
@@ -63,14 +64,14 @@ def send_mail():
 
     server.login('borowski.damien1@gmail.com','dxigaueeafstmgum')
 
-    subject = 'Stock Market Alert'
-    body = 'The price of: '
+    subject = 'IMA send you an emakik'
+    body = 'SPAM '
 
     msg = f"Subject: {subject}\n\n{body}"
 
     server.sendmail(
         'borowski.damien1@gmail.com',
-        'jordan.aherne@ucdconnect.ie',
+        'craven.rafal@gmail.com',
         msg
     )
     print("Email has been sent")
