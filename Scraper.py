@@ -58,7 +58,7 @@ def Check_Valid_Ticker(STOCK):
     # ---- If Invalid Ticker ---- #
     sg.Popup('Invalid Ticker')
 
-
+# Get the real time price of the stock
 def check_price():
     try:
         page = requests.get(site_to_scrape,headers=headers)
@@ -77,6 +77,7 @@ def check_price():
     #if(converted_price > 200):
         #send_mail()
 
+# Send email alert to user
 def send_mail():
     server = smtplib.SMTP('smtp.gmail.com',587)
     server.ehlo()
