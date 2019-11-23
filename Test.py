@@ -11,7 +11,7 @@ STOCK = "MMM"
 
 # Pull the list of S&P 500 symbols from CSV files
 DataBase = pd.read_csv('S&P500-Symbols.csv', index_col=[0])
-#print(DataBase)
+print(DataBase)
 
 def getCompanyInfo(symbols):
     stock_batch = Stock(symbols,token=PUBLIC_TOKEN)
@@ -29,7 +29,7 @@ company_info_to_df = []
 for company in sp_company_info:
     company_info_to_df.append(sp_company_info[company])
 
-single_stock = getHistoricalPrices(STOCK)s
+single_stock = getHistoricalPrices(STOCK)
 single_stock['close'].plot(label="3M Close")
 
 #plt.title(STOCK)

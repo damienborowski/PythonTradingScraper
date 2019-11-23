@@ -4,7 +4,11 @@ import time
 import bs4
 import sys
 import PySimpleGUI as sg
+import pandas as pd
 from bs4 import BeautifulSoup
+
+# Pull the list of S&P 500 symbols from CSV files
+DataBase = pd.read_csv('S&P500-Symbols.csv', index_col=[0])
 
 site_to_scrape = "https://www.marketwatch.com/investing/stock/"
 
@@ -14,29 +18,46 @@ def GUI():
 
     global  site_to_scrape  
 
-    # ------ Menu Definition ------ #
-    menu_def = [['&Tickers',['AAPL','AMZN','MSFT','MGI']]]
-
     sg.change_look_and_feel('Black')	# Add a touch of color
 
     # All the stuff inside your window.
-    layout = [[sg.Menu(menu_def)],[sg.Text('Enter Price'), sg.InputText()],
-            [sg.Button('Create Alert')] ]
+    layout = [
+            [sg.Text('Enter Ticker',size=(10, 1)), sg.InputText()],
+            [sg.Text('Enter Price', size=(10, 1)), sg.InputText()],
+            [sg.Button('Submit')] 
+            ]
 
     # Create the Window
     window = sg.Window('Alert', layout)
     
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
-        event, ticker = window.read()
+        event, input = window.read()
         if event in (None, 'Cancel'):	# if user closes window or clicks cancel
             break
-        print('You entered ', ticker[0])
-        site_to_scrape += ticker[0]
-        print(ticker[0])
-        print(event[0])
+        Check_Valid_Ticker(input[0])
+        print('Ticker: ', input[0])
+        print('Price: ',input[1])
+        site_to_scrape += input[0]
+        if event in (None, 'Cancel','Submit'):	# if user closes window or clicks cancel
+            break
 
     window.close()
+
+    # ---- If Ticker is found ---- #
+    sg.Popup('Found')
+
+#Check if given stock is in the S&P
+def Check_Valid_Ticker(STOCK):
+    STOCK = STOCK.upper()
+    i = 0
+    while i < 505:
+        if STOCK == DataBase.values[i]:
+            return
+        i += 1
+    # ---- If Invalid Ticker ---- #
+    sg.Popup('Invalid Ticker')
+
 
 def check_price():
     try:
@@ -64,8 +85,8 @@ def send_mail():
 
     server.login('borowski.damien1@gmail.com','dxigaueeafstmgum')
 
-    subject = 'IMA send you an emakik'
-    body = 'SPAM '
+    subject = 'Price Target Reached'
+    body = ' '
 
     msg = f"Subject: {subject}\n\n{body}"
 
@@ -85,5 +106,5 @@ def send_mail():
     #time.sleep(1)
 #send_mail()
 GUI()
-check_price()
+#check_price()
 

@@ -12,3 +12,7 @@ version 1.2
 version 1.3
   - Connected to IEX api to get list of stocks and store in csv
   
+version 1.3.1
+  - Reverted back to 1.2 and improved it
+  - Fixed bugs to do with invalid Tickers
+  - All S&P 500 Stocks are available
