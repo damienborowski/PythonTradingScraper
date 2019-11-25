@@ -6,6 +6,7 @@ import sys
 import PySimpleGUI as sg
 import pandas as pd
 from bs4 import BeautifulSoup
+import operator
 
 # Pull the list of S&P 500 symbols from CSV files
 DataBase = pd.read_csv('S&P500-Symbols.csv', index_col=[0])
@@ -13,7 +14,7 @@ DataBase = pd.read_csv('S&P500-Symbols.csv', index_col=[0])
 site_to_scrape = "https://www.marketwatch.com/investing/stock/"
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
-
+# Display the main window to the user
 def GUI():
 
     global  site_to_scrape  
@@ -37,7 +38,7 @@ def GUI():
             break
         Check_Valid_Ticker(input[0])
         print('Ticker: ', input[0])
-        print('Price: ',input[1])
+        print('Alert Price: ',input[1])
         site_to_scrape += input[0]
         if event in (None, 'Cancel','Submit'):	# if user closes window or clicks cancel
             break
@@ -47,7 +48,7 @@ def GUI():
     # ---- If Ticker is found ---- #
     sg.Popup('Found')
 
-#Check if given stock is in the S&P
+# Check if given stock is in the S&P
 def Check_Valid_Ticker(STOCK):
     STOCK = STOCK.upper()
     i = 0
@@ -57,6 +58,10 @@ def Check_Valid_Ticker(STOCK):
         i += 1
     # ---- If Invalid Ticker ---- #
     sg.Popup('Invalid Ticker')
+
+# Function for all the different operators
+def operators(Alert_price,operator,Stock_price):
+    return operator(Alert_price,Stock_price)
 
 # Get the real time price of the stock
 def check_price():
@@ -71,10 +76,10 @@ def check_price():
 
     print("=================RESULTS=================")
 
-    converted_price = float(price[4:10])
-    print(converted_price)
+    Stock_Price = float(price[4:10])
+    print('Actual Price: ',Stock_Price)
 
-    #if(converted_price > 200):
+    #if(Stock_Price > 200):
         #send_mail()
 
 # Send email alert to user
@@ -108,4 +113,4 @@ def send_mail():
 #send_mail()
 GUI()
 #check_price()
-
+#operators(200,operator.gt,150)

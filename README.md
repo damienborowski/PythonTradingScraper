@@ -16,3 +16,6 @@ version 1.3.1
   - Reverted back to 1.2 and improved it
   - Fixed bugs to do with invalid Tickers
   - All S&P 500 Stocks are available
+
+version 1.4
+  - Added method to pass operators for different types of alrts(greater than, equal etc)
