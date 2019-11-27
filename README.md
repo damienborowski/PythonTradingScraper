@@ -19,3 +19,5 @@ version 1.3.1
 
 version 1.4
   - Added method to pass operators for different types of alrts(greater than, equal etc)
+  - Fixed UI for invalid Ticker
+  - Added check to see if 'Price' inputed is numerical and greater then 0.0

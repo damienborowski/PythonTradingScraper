@@ -1,9 +1,9 @@
 Version 2.0
-    - []        Improved Gui experience
-    - []        Responsive feedback for invalid ticker
+    - [DONE]        Improved Gui experience
+    - [DONE]    Responsive feedback for invalid ticker
     - [DONE]    Get a list of available tickers and store it  
-    - []        GUI working for getting ticker (Watching edge cases)
+    - [DONE]    GUI working for getting ticker (Watching edge cases)
 
 Version 3.0
     - []        User can add different operands for their alerts, eg if crosses up/down price equals exactly
-    
+    - []        Display data to user

@@ -23,8 +23,8 @@ def GUI():
 
     # All the stuff inside your window.
     layout = [
-            [sg.Text('Enter Ticker',size=(10, 1)), sg.InputText()],
-            [sg.Text('Enter Price', size=(10, 1)), sg.InputText()],
+            [sg.Text('Enter Ticker',size=(10, 1)), sg.Input(key='Ticker')],
+            [sg.Text('Enter Price', size=(10, 1)), sg.Input(key='Price')],
             [sg.Button('Submit')] 
             ]
 
@@ -36,12 +36,20 @@ def GUI():
         event, input = window.read()
         if event in (None, 'Cancel'):	# if user closes window or clicks cancel
             break
-        Check_Valid_Ticker(input[0])
-        print('Ticker: ', input[0])
-        print('Alert Price: ',input[1])
-        site_to_scrape += input[0]
-        if event in (None, 'Cancel','Submit'):	# if user closes window or clicks cancel
-            break
+        if Check_Valid_Ticker(input['Ticker']) == False:
+            window.FindElement('Ticker').update('')
+            window.FindElement('Price').update('')
+            print("INVALID")
+        elif Check_Valid_Price(input['Price']) == False:
+            window.FindElement('Ticker').update('')
+            window.FindElement('Price').update('')
+            print("INVALID")
+        else:
+            print('Ticker: ', input['Ticker'])
+            print('Alert Price: ',input['Price'])
+            site_to_scrape += input['Ticker']
+            if event in (None, 'Cancel','Submit'):	# if user closes window or clicks cancel
+                break
 
     window.close()
 
@@ -54,10 +62,21 @@ def Check_Valid_Ticker(STOCK):
     i = 0
     while i < 505:
         if STOCK == DataBase.values[i]:
-            return
+            return True
         i += 1
     # ---- If Invalid Ticker ---- #
     sg.Popup('Invalid Ticker')
+    return False
+
+# Check if given stock price is valid
+def Check_Valid_Price(PRICE):
+    try:
+        var = float(PRICE)
+        if var < 0:
+            return False
+        return True
+    except ValueError:
+        return False
 
 # Function for all the different operators
 def operators(Alert_price,operator,Stock_price):
