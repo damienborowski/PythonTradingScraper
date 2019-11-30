@@ -18,6 +18,10 @@ version 1.3.1
   - All S&P 500 Stocks are available
 
 version 1.4
-  - Added method to pass operators for different types of alrts(greater than, equal etc)
+  - Added method to pass operators for different types of alerts(greater than, equal etc)
   - Fixed UI for invalid Ticker
   - Added check to see if 'Price' inputed is numerical and greater then 0.0
+
+  Version 2.0 (DATA PLOTTING)
+  - Starting to do plotting data
+  - Can now get graph of any stock

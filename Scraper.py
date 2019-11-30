@@ -7,17 +7,22 @@ import PySimpleGUI as sg
 import pandas as pd
 from bs4 import BeautifulSoup
 import operator
+from Plot_Data import plot_data
 
 # Pull the list of S&P 500 symbols from CSV files
 DataBase = pd.read_csv('S&P500-Symbols.csv', index_col=[0])
 
 site_to_scrape = "https://www.marketwatch.com/investing/stock/"
+STOCK = ""
+PRICE = 0
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
 # Display the main window to the user
 def GUI():
 
     global  site_to_scrape  
+    global  STOCK
+    global PRICE
 
     sg.change_look_and_feel('Black')	# Add a touch of color
 
@@ -46,6 +51,8 @@ def GUI():
             print("INVALID")
         else:
             print('Ticker: ', input['Ticker'])
+            STOCK = input['Ticker']
+            PRICE = input['Price']
             print('Alert Price: ',input['Price'])
             site_to_scrape += input['Ticker']
             if event in (None, 'Cancel','Submit'):	# if user closes window or clicks cancel
@@ -131,5 +138,7 @@ def send_mail():
     #time.sleep(1)
 #send_mail()
 GUI()
+print(STOCK)
+plot_data(STOCK,PRICE)
 #check_price()
 #operators(200,operator.gt,150)

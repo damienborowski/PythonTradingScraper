@@ -6,3 +6,7 @@ Version 1.3 Bugs
  [] GUI - Enter button doesnt do anything
  [/] No checks for price
  [/] GUI - Windows not opening in correct manner
+
+ Version 1.4 Bugs
+ [] Issue closing the matplot
+ [] Price in plot_data class not working
